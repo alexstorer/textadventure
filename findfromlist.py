@@ -1,7 +1,6 @@
 import sys
 import getopt
 import glob
-import pyPdf
 import csv
 
 def interact():
@@ -10,15 +9,17 @@ def interact():
 
 def compareSingle(tabfile,txt):
     # return 1 if things are found, 0 otherwise
+    txtfile = txt
     tab = open(tabfile,'r').read()
     txt = open(txt,'r').read()
     d = dict()
     for cite in tab.split('\r'):
-        if txt.find(cite)>=0:
-            d[cite] = 1
-            print "found ", cite, " in ", txt[0:30]
-        else:
-            d[cite] = 0    
+        if len(cite)>0:
+            if txt.find(cite)>=0:
+                d[cite] = 1
+                print "found ", cite, " in ", txtfile
+            else:
+                d[cite] = 0    
     return d
             
 def main():
